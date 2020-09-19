@@ -85,6 +85,11 @@ h1 {
 
 .pin {
     cursor: pointer;
+    transform: translate(-50%, -50%);
+}
+
+.map__container {
+    position: relative;
 }
 
 .popup {
@@ -93,4 +98,39 @@ h1 {
     border-radius: 3px;
     border: 1px solid $dark-gray;
     transform: translate(20px, 20px);
+}
+
+.legend {
+    position: absolute;
+    background-color: $white;
+    padding: 10px 20px;
+    border-radius: 3px;
+    border: 1px solid $dark-gray;
+
+    bottom: 40px;
+    left: 20px;
+    .pin {
+        transform: translate(0, 0);
+    }
+    
+
+    ul {
+        li {
+            height: 50px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            .pin {
+                width: 40;
+            }
+
+            input {
+                width: 40px;
+            }
+
+            label {
+                flex-grow: 1;
+            }
+        }
+    }
 }

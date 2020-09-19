@@ -21,7 +21,7 @@ export const Dashboard = () => {
     }, []);
 
     const resize = () => {
-        setViewport({ ...viewport, height: window.innerHeight, width: window.innerWidth });
+        setViewport({ ...viewport, height: window.innerHeight - 51, width: window.innerWidth });
     };
 
     useEffect(() => {
