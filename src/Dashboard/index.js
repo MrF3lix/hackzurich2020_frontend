@@ -12,6 +12,7 @@ export const Dashboard = () => {
     });
     const [trucks, setTrucks] = useState([]);
     const [facilities, setFacilities] = useState([]);
+    const [pickups, setPickups] = useState([]);
 
     useEffect(() => {
         resize();
@@ -32,11 +33,14 @@ export const Dashboard = () => {
         const facilityLocationRef = Firebase.getRef('facilities', getData);
         facilityLocationRef.on('value', snapshot => setFacilities(snapshot.val()));
 
+        const pickupLocationRef = Firebase.getRef('pickups', getData);
+        pickupLocationRef.on('value', snapshot => setPickups(snapshot.val()));
+
     }, []);
     
     return (
         <div>
-            <Map viewport={viewport} setViewport={setViewport} trucks={trucks} facilities={facilities}/>
+            <Map viewport={viewport} setViewport={setViewport} trucks={trucks} facilities={facilities} pickups={pickups}/>
         </div>
     );
 };

@@ -26,7 +26,7 @@ export const Pin = ({ size, onClick, ...rest }) => (
 export const TruckLocationPin = ({ size = 40, isLive = true, direction = 0, ...rest }) => {
 
     return (
-        <svg transform={`rotate(${direction - 45})`} width={size} height={size} {...rest} viewBox="0 0 328 328" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="pin" transform={`rotate(${direction - 45})`} width={size} height={size} {...rest} viewBox="0 0 328 328" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle id={isLive && 'tracking-pin__animation'} cx="164" cy="164" r="164" fill="#3E38F2" fillOpacity="0.2" />
             <circle cx="164" cy="164" r="100" fill="white" />
             <circle cx="162.5" cy="162.5" r="87.5" fill="#230A59" />
@@ -36,7 +36,7 @@ export const TruckLocationPin = ({ size = 40, isLive = true, direction = 0, ...r
 };
 
 export const ConstructionSitePin = ({ size = 40, ...rest }) => (
-    <svg width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className="pin" width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="100" fill="white" />
         <circle cx="100.5" cy="100.5" r="87.5" fill="#0AA620" />
         <circle cx="101" cy="100" r="36.5" stroke="white" strokeWidth="5" />
@@ -46,8 +46,24 @@ export const ConstructionSitePin = ({ size = 40, ...rest }) => (
 );
 
 export const CementFactoryPin = ({ size = 40, ...rest }) => (
-    <svg width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className="pin" width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="100" fill="white" />
         <circle cx="100.5" cy="100.5" r="87.5" fill="#DE8122" />
     </svg>
 );
+
+export const PickupLocationPin = ({ size = 40, isLive = true, ...rest }) => {
+    return (
+        <svg className="pin" width={size} height={size} {...rest} viewBox="0 0 328 328" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle id={isLive && 'tracking-pin__animation'} cx="164" cy="164" r="164" fill="#0029FA" fillOpacity="0.2" />
+            <circle cx="163" cy="164" r="100" fill="white" />
+            <circle cx="163.5" cy="164.5" r="87.5" fill="#0029FA" />
+            <path d="M167.69 210.6L158.915 201.824L167.69 193.05" stroke="white" strokeWidth="6" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M194.433 149.076L191.261 161.042L179.235 157.851" stroke="white" strokeWidth="6" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M127.78 156.678L139.729 153.441L142.98 165.453" stroke="white" strokeWidth="6" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M191.261 161.042L167.101 119.194C165.412 116.269 161.191 116.269 159.502 119.194L145.579 143.309" stroke="white" strokeWidth="6" strokeMiterlimit="10" strokeLinecap="round" />
+            <path d="M197.111 171.174L211.008 195.242C212.697 198.167 210.585 201.824 207.208 201.824H158.914" stroke="white" strokeWidth="6" strokeMiterlimit="10" strokeLinecap="round" />
+            <path d="M139.729 153.441L115.594 195.242C113.905 198.167 116.017 201.824 119.394 201.824H147.214" stroke="white" strokeWidth="6" strokeMiterlimit="10" strokeLinecap="round" />
+        </svg>
+    );
+};

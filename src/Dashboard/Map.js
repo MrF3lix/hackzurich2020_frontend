@@ -1,8 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
-import { ConstructionSitePin, CementFactoryPin, TruckLocationPin } from '../Atoms/Pin';
+import { ConstructionSitePin, CementFactoryPin, TruckLocationPin, PickupLocationPin } from '../Atoms/Pin';
 
-export const Map = ({ viewport, setViewport, trucks, facilities, isDarkMode = false }) => {
+export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDarkMode = false }) => {
+    const [activeItemId, setActiveItemId] = useState();
+
+    const updateActiveItem = (latitude, longitude , id) => {
+        setActiveItemId(id);
+        setViewport({ ...viewport, latitude: latitude, longitude: longitude });
+    };
+
+    console.log(trucks);
     return (
         <div className="map__container">
             <ReactMapGL
@@ -14,17 +22,32 @@ export const Map = ({ viewport, setViewport, trucks, facilities, isDarkMode = fa
             >
                 {trucks && trucks.map(truck => (
                     <Marker key={truck.id} latitude={truck.currentLocationLat} longitude={truck.currentLocationLon}>
-                        <TruckLocationPin />
+                        <TruckLocationPin onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
                     </Marker>
                 ))}
                 {facilities && facilities.map(facility => (
                     <Marker key={facility.id} latitude={facility.locationLat} longitude={facility.locationLog}>
                         {facility.type === 'ConstructionSite' &&
-                            <ConstructionSitePin />
+                            <ConstructionSitePin onClick={() => updateActiveItem(facility.locationLat, facility.locationLog, facility.id)} />
                         }
                         {facility.type === 'CementFactory' &&
-                            <CementFactoryPin />
+                            <CementFactoryPin onClick={() => updateActiveItem(facility.locationLat, facility.locationLog, facility.id)} />
                         }
+                    </Marker>
+                ))}
+                {/* {facilities && facilities.map(facility => (
+                    <Marker key={facility.id} latitude={facility.locationLat} longitude={facility.locationLog}>
+                        {facility.id === activeItemId &&
+                            <div className="popup">
+                                {facility.id}
+                            </div>
+                        }
+                    </Marker>
+                ))} */}
+                
+                {pickups && pickups.map(pickup => (
+                    <Marker onClick={() => updateActiveItem(pickup.locationLat, pickup.locationLog, pickup.id)}  key={pickup.id} latitude={pickup.locationLat} longitude={pickup.locationLog}>
+                        <PickupLocationPin />
                     </Marker>
                 ))}
             </ReactMapGL>
