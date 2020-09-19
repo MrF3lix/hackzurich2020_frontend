@@ -23,7 +23,7 @@ export const Pin = ({ size, onClick, ...rest }) => (
     </svg>
 );
 
-export const TruckLocationPin = ({ size = 40, isLive = true, direction = 0, ...rest }) => {
+export const TruckLocationPin = ({ size = 55, isLive = true, direction = 0, ...rest }) => {
 
     return (
         <svg className="pin" transform={`rotate(${direction - 45})`} width={size} height={size} {...rest} viewBox="0 0 328 328" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +35,7 @@ export const TruckLocationPin = ({ size = 40, isLive = true, direction = 0, ...r
     );
 };
 
-export const ConstructionSitePin = ({ size = 40, ...rest }) => (
+export const ConstructionSitePin = ({ size = 35, ...rest }) => (
     <svg className="pin" width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="100" fill="white" />
         <circle cx="100.5" cy="100.5" r="87.5" fill="#0AA620" />
@@ -45,14 +45,14 @@ export const ConstructionSitePin = ({ size = 40, ...rest }) => (
     </svg>
 );
 
-export const CementFactoryPin = ({ size = 40, ...rest }) => (
+export const CementFactoryPin = ({ size = 35, ...rest }) => (
     <svg className="pin" width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="100" fill="white" />
         <circle cx="100.5" cy="100.5" r="87.5" fill="#DE8122" />
     </svg>
 );
 
-export const PickupLocationPin = ({ size = 40, isLive = true, ...rest }) => {
+export const PickupLocationPin = ({ size = 55, isLive = true, ...rest }) => {
     return (
         <svg className="pin" width={size} height={size} {...rest} viewBox="0 0 328 328" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle id={isLive && 'tracking-pin__animation'} cx="164" cy="164" r="164" fill="#0029FA" fillOpacity="0.2" />
