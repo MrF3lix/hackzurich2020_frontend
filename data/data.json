@@ -1,0 +1,13 @@
+{
+    "trucks": [{
+        "id": 123,
+        "userId": 321,
+        "currentLocationLon": 42.5,
+        "currentLocationLat": 12.0,
+        "homeLocationLon": 42.5,
+        "homeLocationLat": 12.0,
+        "createdAt": "2020-09-19-15-58-33",
+        "payload": "Cement",
+        "maxLoad": 1
+    }]
+}
