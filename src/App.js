@@ -32,10 +32,12 @@ const App = () => (
                 <Pickup />
             </Route>
             <Route path="/add-pickup/done" exact>
-                <div>NOT IMPLEMENTED: Thank you for adding a pickup.</div>
+                <div className="inner inner--small">
+                    <h1>Thank you for adding a pickup.</h1>
+                </div>
             </Route>
             <Route path="/">
-                <Redirect to="/dashboard"/>
+                <Redirect to="/dashboard" />
             </Route>
         </Switch>
     </Router>

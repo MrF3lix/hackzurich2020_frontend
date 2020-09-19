@@ -62,7 +62,7 @@ export const AddPickupForm = () => {
                         />
                     </div>
                     <div className="input__container">
-                        <label>Type</label>
+                        <label>Type *</label>
                         <Field
                             name="type"
                             component={InputSelect}
@@ -76,7 +76,7 @@ export const AddPickupForm = () => {
                         />
                     </div>
                     <div className="input__container">
-                        <label>Amount (Kg)</label>
+                        <label>Amount (Kg) *</label>
                         <Field
                             name="amount"
                             type="text"
