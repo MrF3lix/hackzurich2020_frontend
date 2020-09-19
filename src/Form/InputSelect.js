@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 
 export const InputSelect = ({ items, input, disabled, meta: { touched, error } }) => (
-    <div>
+    <>
         <select
             {...input}
             disabled={disabled}
@@ -23,5 +23,5 @@ export const InputSelect = ({ items, input, disabled, meta: { touched, error } }
                 <span className="error__message">{error}</span>
             </div>
         }
-    </div>
+    </>
 );

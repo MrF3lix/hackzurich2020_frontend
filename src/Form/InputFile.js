@@ -8,7 +8,7 @@ const InputFile = ({ selector, label, input: { onChange, value }, meta, ...props
     const hasError = (meta.error || meta.submitError) && meta.touched;
 
     return (
-        <div>
+        <>
             <input
                 onChange={adaptFileEventToValue(onChange)}
                 className={classNames('input--file', {
@@ -28,7 +28,7 @@ const InputFile = ({ selector, label, input: { onChange, value }, meta, ...props
                     <img src={imageUrl} alt="Upload image" />
                 </div>
             } */}
-        </div>
+        </>
     );
 };
 
