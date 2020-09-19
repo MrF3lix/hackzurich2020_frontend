@@ -19,11 +19,6 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                 {...viewport}
                 onViewportChange={setViewport}
             >
-                {trucks && Array.isArray(trucks) && trucks.map(truck => (
-                    <Marker key={truck.id} latitude={truck.currentLocationLat} longitude={truck.currentLocationLon}>
-                        <TruckLocationPin direction={truck.angle} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
-                    </Marker>
-                ))}
                 {facilities && Array.isArray(facilities) && facilities.map(facility => (
                     <Marker key={facility.id} latitude={facility.locationLat} longitude={facility.locationLog}>
                         {facility.type === 'ConstructionSite' &&
@@ -48,6 +43,11 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                 {pickups && Array.isArray(pickups) && pickups.map(pickup => (
                     <Marker onClick={() => updateActiveItem(pickup.locationLat, pickup.locationLog, pickup.id)} key={pickup.id} latitude={pickup.locationLat} longitude={pickup.locationLog}>
                         <PickupLocationPin />
+                    </Marker>
+                ))}
+                {trucks && Array.isArray(trucks) && trucks.map(truck => (
+                    <Marker key={truck.id} latitude={truck.currentLocationLat} longitude={truck.currentLocationLon}>
+                        <TruckLocationPin direction={truck.angle} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
                     </Marker>
                 ))}
             </ReactMapGL>
