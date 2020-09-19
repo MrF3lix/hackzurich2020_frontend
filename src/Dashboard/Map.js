@@ -19,12 +19,12 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                 {...viewport}
                 onViewportChange={setViewport}
             >
-                {trucks && trucks.map(truck => (
+                {trucks && Array.isArray(trucks) && trucks.map(truck => (
                     <Marker key={truck.id} latitude={truck.currentLocationLat} longitude={truck.currentLocationLon}>
                         <TruckLocationPin direction={truck.angle} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
                     </Marker>
                 ))}
-                {facilities && facilities.map(facility => (
+                {facilities && Array.isArray(facilities) && facilities.map(facility => (
                     <Marker key={facility.id} latitude={facility.locationLat} longitude={facility.locationLog}>
                         {facility.type === 'ConstructionSite' &&
                             <ConstructionSitePin onClick={() => updateActiveItem(facility.locationLat, facility.locationLog, facility.id)} />
@@ -34,7 +34,7 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                         }
                     </Marker>
                 ))}
-                {facilities && facilities.map(facility => (
+                {/* {facilities && facilities.map(facility => (
                     <Marker key={facility.id} latitude={facility.locationLat} longitude={facility.locationLog}>
                         {facility.id === activeItemId &&
                             <div className="popup">
@@ -43,9 +43,9 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                             </div>
                         }
                     </Marker>
-                ))}
+                ))} */}
 
-                {pickups && pickups.map(pickup => (
+                {pickups && Array.isArray(pickups) && pickups.map(pickup => (
                     <Marker onClick={() => updateActiveItem(pickup.locationLat, pickup.locationLog, pickup.id)} key={pickup.id} latitude={pickup.locationLat} longitude={pickup.locationLog}>
                         <PickupLocationPin />
                     </Marker>
