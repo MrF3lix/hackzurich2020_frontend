@@ -101,7 +101,6 @@ export const AddPickupForm = () => {
                             component={InputFile}
                             type="file"
                             selector="imageLabel"
-                            label={'Add image'}
                             disabled={submitting}
                         />
                     </div>

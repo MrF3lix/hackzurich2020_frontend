@@ -3,7 +3,8 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    NavLink,
+    Redirect
 } from 'react-router-dom';
 import { Dashboard } from './Dashboard';
 import { Pickup } from './Pickup';
@@ -11,12 +12,12 @@ import { Pickup } from './Pickup';
 const App = () => (
     <Router>
         <header>
+            <div></div>
             <nav>
                 <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/dashboard">Dashboard</Link></li>
-                    <li><Link to="/add-pickup">Add Pickup</Link></li>
-                    <li><Link to="/driver/1">Driver 1</Link></li>
+                    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                    <li><NavLink to="/add-pickup">Add Pickup</NavLink></li>
+                    {/* <li><Link to="/driver/1">Driver 1</Link></li> */}
                 </ul>
             </nav>
         </header>
@@ -34,7 +35,7 @@ const App = () => (
                 <div>NOT IMPLEMENTED: Thank you for adding a pickup.</div>
             </Route>
             <Route path="/">
-                <div>NOT IMPLEMENTED: Home</div>
+                <Redirect to="/dashboard"/>
             </Route>
         </Switch>
     </Router>
