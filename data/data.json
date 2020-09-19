@@ -9,5 +9,59 @@
         "createdAt": "2020-09-19-15-58-33",
         "payload": "Cement",
         "maxLoad": 1
-    }]
+    }],
+    "facilities": [{
+            "id": 0,
+            "type": "Cement Factory",
+            "locationLog": 3.20775008201599,
+            "locationLat": 6.90380573272705
+        },
+        {
+            "id": 1,
+            "type": "Cement Factory",
+            "locationLog": 5.75766658782959,
+            "locationLat": 5.67044448852539
+        },
+        {
+            "id": 2,
+            "type": "Cement Factory",
+            "locationLog": 11.4774446487427,
+            "locationLat": 10.9261665344238
+        }, {
+            "id": 3,
+            "type": "Construction Side",
+            "locationLog": 3.89908337593079,
+            "locationLat": 6.79808330535889
+        }, {
+            "id": 4,
+            "type": "Construction Side",
+            "locationLog": 3.46441674232483,
+            "locationLat": 6.82705545425415
+        }, {
+            "id": 5,
+            "type": "Construction Side",
+            "locationLog": 7.56699991226196,
+            "locationLat": 6.45522212982178
+        }, {
+            "id": 6,
+            "type": "Construction Side",
+            "locationLog": 8.00633335113525,
+            "locationLat": 6.00372219085693
+        }, {
+            "id": 7,
+            "type": "Construction Side",
+            "locationLog": 10.5158615112305,
+            "locationLat": 11.6483888626099
+        }, {
+            "id": 8,
+            "type": "Construction Side",
+            "locationLog": 11.0423612594604,
+            "locationLat": 11.7172498703003
+        }, {
+            "id": 9,
+            "type": "Construction Side",
+            "locationLog": 12.402889251709,
+            "locationLat": 9.28055572509766
+        }
+    ]
 }
