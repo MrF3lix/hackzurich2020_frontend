@@ -72,3 +72,11 @@ export const PickupLocationPin = ({ size = 55, isLive = true, isDisabled, ...res
         </svg>
     );
 };
+
+export const WarningPin = ({ size = 35, isDisabled, ...rest }) => (
+    <svg className={classnames('pin', { 'gray': isDisabled })} width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="100" cy="100" r="100" fill="white" />
+        <circle cx="100.5" cy="100.5" r="87.5" fill="#FF0000" />
+        <path d="M108.555 113.988H92.5586L90.0391 55.6875H111.074L108.555 113.988ZM89.4531 132.152C89.4531 129.262 90.4883 126.898 92.5586 125.062C94.668 123.188 97.2852 122.25 100.41 122.25C103.535 122.25 106.133 123.188 108.203 125.062C110.312 126.898 111.367 129.262 111.367 132.152C111.367 135.043 110.312 137.426 108.203 139.301C106.133 141.137 103.535 142.055 100.41 142.055C97.2852 142.055 94.668 141.137 92.5586 139.301C90.4883 137.426 89.4531 135.043 89.4531 132.152Z" fill="white" />
+    </svg>
+);

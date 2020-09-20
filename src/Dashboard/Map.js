@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import * as geolib from 'geolib';
 import ReactMapGL, { Marker } from 'react-map-gl';
-import { ConstructionSitePin, CementFactoryPin, TruckLocationPin, PickupLocationPin } from '../Atoms/Pin';
+import { ConstructionSitePin, CementFactoryPin, TruckLocationPin, PickupLocationPin, WarningPin } from '../Atoms/Pin';
 import PolylineOverlay from './PolylineOverlay';
 
-export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDarkMode = false }) => {
+export const Map = ({ viewport, setViewport, trucks, facilities, pickups, warnings, isDarkMode = false }) => {
     const [, setActiveItemId] = useState();
     const [showPickups, setShowPickups] = useState(true);
     const [showSites, setShowSites] = useState(true);
     const [showFactories, setShowFactories] = useState(true);
     const [showTrucks, setShowTrucks] = useState(true);
+    const [showWarnings, setShowWarnings] = useState(true);
 
     const updateActiveItem = (latitude, longitude, id) => {
         setActiveItemId(id);
@@ -62,9 +63,10 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                                 longitude: route[nextIndex][0]
                             }
                         );
-
-                        console.log(direction);
                     }
+
+                    
+
                     return (
                         <React.Fragment key={truck.id}>
                             <PolylineOverlay points={route}/>
@@ -74,6 +76,11 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                         </React.Fragment>
                     );
                 })}
+                {showWarnings && warnings && Array.isArray(warnings) && warnings.map(warning => (
+                    <Marker onClick={() => updateActiveItem(warning.locationLat, warning.locationLog, warning.id)} key={warning.id} latitude={warning.locationLat} longitude={warning.locationLog}>
+                        <WarningPin />
+                    </Marker>
+                ))}
             </ReactMapGL>
 
             <div className="legend">
@@ -93,6 +100,10 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                     <li onClick={() => setShowFactories(!showFactories)}>
                         <CementFactoryPin isDisabled={!showFactories} size={40} onClick={() => setShowFactories(!showFactories)} />
                         <label>Factories</label>
+                    </li>
+                    <li onClick={() => setShowWarnings(!showWarnings)}>
+                        <WarningPin isDisabled={!showWarnings} size={40} />
+                        <label>Warnings</label>
                     </li>
                 </ul>
             </div>
