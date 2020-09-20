@@ -19,12 +19,6 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
 
     }, [activeItemId]);
 
-    const activeTruck = trucks && trucks.find(t => t.id === activeItemId);
-    let route = [];
-    if (activeTruck && activeTruck.route) {
-        route = JSON.parse(activeTruck.route);
-    }
-
     return (
         <div className="map__container">
             <ReactMapGL
@@ -34,10 +28,6 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                 {...viewport}
                 onViewportChange={setViewport}
             >
-                {activeTruck && activeTruck.route &&
-                    <PolylineOverlay points={route} />
-                }
-
                 {facilities && Array.isArray(facilities) && facilities.map(facility => (
                     <Marker key={facility.id} latitude={facility.locationLat} longitude={facility.locationLog}>
                         {showSites && facility.type === 'ConstructionSite' &&
@@ -64,11 +54,17 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                         <PickupLocationPin />
                     </Marker>
                 ))}
-                {showTrucks && trucks && Array.isArray(trucks) && trucks.map(truck => (
-                    <Marker key={truck.id} latitude={truck.currentLocationLat} longitude={truck.currentLocationLon}>
-                        <TruckLocationPin size={35} direction={truck.angle} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
-                    </Marker>
-                ))}
+                {showTrucks && trucks && Array.isArray(trucks) && trucks.map(truck => {
+                    const route = JSON.parse(truck.route);
+                    return (
+                        <>
+                            <PolylineOverlay points={route} />
+                            <Marker key={truck.id} latitude={truck.currentLocationLat} longitude={truck.currentLocationLon}>
+                                <TruckLocationPin size={35} direction={truck.angle} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
+                            </Marker>
+                        </>
+                    );
+                })}
             </ReactMapGL>
 
             <div className="legend">
