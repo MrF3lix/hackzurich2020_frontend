@@ -112,7 +112,7 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, warnin
                     </li>
                     <li onClick={() => setShowWarnings(!showWarnings)}>
                         <WarningPin isDisabled={!showWarnings} size={40} />
-                        <label>Warnings</label>
+                        <label>Dangers</label>
                     </li>
                 </ul>
             </div>
