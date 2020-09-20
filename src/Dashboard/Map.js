@@ -15,10 +15,6 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
         setViewport({ ...viewport, latitude: latitude, longitude: longitude });
     };
 
-    useEffect(() => {
-
-    }, [activeItemId]);
-
     return (
         <div className="map__container">
             <ReactMapGL
@@ -55,14 +51,17 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                     </Marker>
                 ))}
                 {showTrucks && trucks && Array.isArray(trucks) && trucks.map(truck => {
-                    const route = JSON.parse(truck.route);
+                    let route = [];
+                    if(truck.route) {
+                        route = JSON.parse(truck.route);
+                    }
                     return (
-                        <>
-                            <PolylineOverlay points={route} />
-                            <Marker key={truck.id} latitude={truck.currentLocationLat} longitude={truck.currentLocationLon}>
+                        <React.Fragment key={truck.id}>
+                            <PolylineOverlay points={route}/>
+                            <Marker latitude={truck.currentLocationLat} longitude={truck.currentLocationLon}>
                                 <TruckLocationPin size={35} direction={truck.angle} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
                             </Marker>
-                        </>
+                        </React.Fragment>
                     );
                 })}
             </ReactMapGL>
