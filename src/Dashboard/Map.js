@@ -44,14 +44,15 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, warnin
                 ))}
                 {showTrucks && trucks && Array.isArray(trucks) && trucks.map(truck => {
                     let route = [];
+                    let hasWarning = false;
                     let direction = 0;
-                    if(truck.route) {
+                    if (truck.route) {
                         route = JSON.parse(truck.route);
 
                         let index = route.findIndex(item => item[0] === truck.currentLocationLon && item[1] === truck.currentLocationLat);
                         console.log(index);
 
-                        let nextIndex = index === route.length-1 ? index-1:index+1;
+                        let nextIndex = index === route.length - 1 ? index - 1 : index + 1;
 
                         direction = geolib.getRhumbLineBearing(
                             {
@@ -65,11 +66,19 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, warnin
                         );
                     }
 
-                    
+                    if (warnings && Array.isArray(warnings)) {
+                        hasWarning = warnings.some(warning => {
+                            let warningIndex = route.findIndex(item => item[0] === warning.locationLog && item[1] === warning.locationLat);
+
+                            return warningIndex !== -1;
+                        });
+                    }
+
+
 
                     return (
                         <React.Fragment key={truck.id}>
-                            <PolylineOverlay points={route}/>
+                            <PolylineOverlay points={route} color={hasWarning ? 'red' : '#0029FA'} />
                             <Marker latitude={truck.currentLocationLat} longitude={truck.currentLocationLon} className="mapboxgl-marker--animated">
                                 <TruckLocationPin size={35} direction={direction} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
                             </Marker>
