@@ -78,7 +78,7 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, warnin
 
                     return (
                         <React.Fragment key={truck.id}>
-                            <PolylineOverlay points={route} color={hasWarning ? 'red' : '#0029FA'} />
+                            <PolylineOverlay points={route} color={(hasWarning && showWarnings) ? 'red' : '#0029FA'} />
                             <Marker latitude={truck.currentLocationLat} longitude={truck.currentLocationLon} className="mapboxgl-marker--animated">
                                 <TruckLocationPin size={35} direction={direction} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
                             </Marker>
