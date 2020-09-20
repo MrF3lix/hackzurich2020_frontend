@@ -8,7 +8,7 @@ export const Dashboard = () => {
     const [viewport, setViewport] = useState({
         latitude: 9.24,
         longitude: 7.63,
-        zoom: 5,
+        zoom: 5.5,
     });
     const [trucks, setTrucks] = useState([]);
     const [facilities, setFacilities] = useState([]);

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMapGL, { Marker } from 'react-map-gl';
 import { ConstructionSitePin, CementFactoryPin, TruckLocationPin, PickupLocationPin } from '../Atoms/Pin';
+import PolylineOverlay from './PolylineOverlay';
 
 export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDarkMode = false }) => {
     const [activeItemId, setActiveItemId] = useState();
@@ -14,6 +15,16 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
         setViewport({ ...viewport, latitude: latitude, longitude: longitude });
     };
 
+    useEffect(() => {
+
+    }, [activeItemId]);
+
+    const activeTruck = trucks && trucks.find(t => t.id === activeItemId);
+    let route = [];
+    if (activeTruck && activeTruck.route) {
+        route = JSON.parse(activeTruck.route);
+    }
+
     return (
         <div className="map__container">
             <ReactMapGL
@@ -23,6 +34,10 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                 {...viewport}
                 onViewportChange={setViewport}
             >
+                {activeTruck && activeTruck.route &&
+                    <PolylineOverlay points={route} />
+                }
+
                 {facilities && Array.isArray(facilities) && facilities.map(facility => (
                     <Marker key={facility.id} latitude={facility.locationLat} longitude={facility.locationLog}>
                         {showSites && facility.type === 'ConstructionSite' &&
@@ -59,12 +74,13 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
             <div className="legend">
                 <ul>
                     <li>
-                        <TruckLocationPin isLive={false} size={40} direction={45} onClick={() => setShowTrucks(!showTrucks)}/>
+                        <TruckLocationPin isLive={false} size={40} direction={45} onClick={() => setShowTrucks(!showTrucks)} />
                         <input
                             id="trucks"
                             type="checkbox"
                             checked={showTrucks}
                             onClick={() => setShowTrucks(!showTrucks)}
+                            onChange={() => {}}
                         />
                         <label htmlFor="trucks">Trucks</label>
                     </li>
@@ -75,6 +91,7 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                             type="checkbox"
                             checked={showPickups}
                             onClick={() => setShowPickups(!showPickups)}
+                            onChange={() => {}}
                         />
                         <label htmlFor="pickup">Pickup Points</label>
                     </li>
@@ -85,6 +102,7 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                             type="checkbox"
                             checked={showSites}
                             onClick={() => setShowSites(!showSites)}
+                            onChange={() => {}}
                         />
                         <label htmlFor="sites">Sites</label>
                     </li>
@@ -95,6 +113,7 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                             type="checkbox"
                             checked={showFactories}
                             onClick={() => setShowFactories(!showFactories)}
+                            onChange={() => {}}
                         />
                         <label htmlFor="factories">Factories</label>
                     </li>
