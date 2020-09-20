@@ -47,23 +47,32 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, warnin
                     let hasWarning = false;
                     let direction = 0;
                     if (truck.route) {
-                        route = JSON.parse(truck.route);
+                        try {
+                            route = JSON.parse(truck.route);
+                        } catch(e) {
+                            console.error('Couldn\'t parse route');
+                            console.error(truck.route);
 
-                        let index = route.findIndex(item => item[0] === truck.currentLocationLon && item[1] === truck.currentLocationLat);
-                        console.log(index);
+                            route = truck.route;
+                        }
 
-                        let nextIndex = index === route.length - 1 ? index - 1 : index + 1;
-
-                        direction = geolib.getRhumbLineBearing(
-                            {
-                                latitude: route[index][1],
-                                longitude: route[index][0]
-                            },
-                            {
-                                latitude: route[nextIndex][1],
-                                longitude: route[nextIndex][0]
-                            }
-                        );
+                        try {
+                            let index = route.findIndex(item => item[0] === truck.currentLocationLon && item[1] === truck.currentLocationLat);
+                            let nextIndex = index === route.length - 1 ? index - 1 : index + 1;
+    
+                            direction = geolib.getRhumbLineBearing(
+                                {
+                                    latitude: route[index][1],
+                                    longitude: route[index][0]
+                                },
+                                {
+                                    latitude: route[nextIndex][1],
+                                    longitude: route[nextIndex][0]
+                                }
+                            );
+                        } catch(e) {
+                            console.error('Couldn\'t get direction');
+                        }
                     }
 
                     if (warnings && Array.isArray(warnings)) {
