@@ -66,56 +66,28 @@ export const Map = ({ viewport, setViewport, trucks, facilities, pickups, isDark
                 ))}
                 {showTrucks && trucks && Array.isArray(trucks) && trucks.map(truck => (
                     <Marker key={truck.id} latitude={truck.currentLocationLat} longitude={truck.currentLocationLon}>
-                        <TruckLocationPin direction={truck.angle} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
+                        <TruckLocationPin size={35} direction={truck.angle} onClick={() => updateActiveItem(truck.currentLocationLat, truck.currentLocationLon, truck.id)} />
                     </Marker>
                 ))}
             </ReactMapGL>
 
             <div className="legend">
                 <ul>
-                    <li>
-                        <TruckLocationPin isLive={false} size={40} direction={45} onClick={() => setShowTrucks(!showTrucks)} />
-                        <input
-                            id="trucks"
-                            type="checkbox"
-                            checked={showTrucks}
-                            onClick={() => setShowTrucks(!showTrucks)}
-                            onChange={() => {}}
-                        />
-                        <label htmlFor="trucks">Trucks</label>
+                    <li onClick={() => setShowTrucks(!showTrucks)}>
+                        <TruckLocationPin isDisabled={!showTrucks} isLive={false} size={40} direction={45} onClick={() => setShowTrucks(!showTrucks)} />
+                        <label>Trucks</label>
                     </li>
-                    <li>
-                        <PickupLocationPin isLive={false} size={40} onClick={() => setShowPickups(!showPickups)} />
-                        <input
-                            id="pickup"
-                            type="checkbox"
-                            checked={showPickups}
-                            onClick={() => setShowPickups(!showPickups)}
-                            onChange={() => {}}
-                        />
-                        <label htmlFor="pickup">Pickup Points</label>
+                    <li onClick={() => setShowPickups(!showPickups)}>
+                        <PickupLocationPin isDisabled={!showPickups} isLive={false} size={40} onClick={() => setShowPickups(!showPickups)} />
+                        <label>Pickup Points</label>
                     </li>
-                    <li>
-                        <ConstructionSitePin size={40} onClick={() => setShowSites(!showSites)} />
-                        <input
-                            id="sites"
-                            type="checkbox"
-                            checked={showSites}
-                            onClick={() => setShowSites(!showSites)}
-                            onChange={() => {}}
-                        />
-                        <label htmlFor="sites">Sites</label>
+                    <li onClick={() => setShowSites(!showSites)}>
+                        <ConstructionSitePin isDisabled={!showSites} size={40} onClick={() => setShowSites(!showSites)} />
+                        <label>Sites</label>
                     </li>
-                    <li>
-                        <CementFactoryPin size={40} onClick={() => setShowFactories(!showFactories)} />
-                        <input
-                            id="factories"
-                            type="checkbox"
-                            checked={showFactories}
-                            onClick={() => setShowFactories(!showFactories)}
-                            onChange={() => {}}
-                        />
-                        <label htmlFor="factories">Factories</label>
+                    <li onClick={() => setShowFactories(!showFactories)}>
+                        <CementFactoryPin isDisabled={!showFactories} size={40} onClick={() => setShowFactories(!showFactories)} />
+                        <label>Factories</label>
                     </li>
                 </ul>
             </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import '../Content/Styles/animation.scss';
 
 const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
@@ -23,10 +24,9 @@ export const Pin = ({ size, onClick, ...rest }) => (
     </svg>
 );
 
-export const TruckLocationPin = ({ size = 55, isLive = true, direction = 0, ...rest }) => {
-
+export const TruckLocationPin = ({ size = 55, isLive = true, direction = 0, isDisabled, ...rest }) => {
     return (
-        <svg className="pin" transform={`rotate(${direction - 45})`} width={size} height={size} {...rest} viewBox="0 0 328 328" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className={classnames('pin', { 'gray': isDisabled })} transform={`rotate(${direction - 45})`} width={size} height={size} {...rest} viewBox="0 0 328 328" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle id={isLive ? 'tracking-pin__animation' : ''} cx="164" cy="164" r="164" fill="#3E38F2" fillOpacity="0.2" />
             <circle cx="164" cy="164" r="100" fill="white" />
             <circle cx="162.5" cy="162.5" r="87.5" fill="#230A59" />
@@ -35,8 +35,8 @@ export const TruckLocationPin = ({ size = 55, isLive = true, direction = 0, ...r
     );
 };
 
-export const ConstructionSitePin = ({ size = 35, ...rest }) => (
-    <svg className="pin" width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const ConstructionSitePin = ({ size = 35, isDisabled, ...rest }) => (
+    <svg className={classnames('pin', { 'gray': isDisabled })} width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="100" fill="white" />
         <circle cx="100.5" cy="100.5" r="87.5" fill="#0AA620" />
         <circle cx="101" cy="100" r="36.5" stroke="white" strokeWidth="5" />
@@ -45,8 +45,8 @@ export const ConstructionSitePin = ({ size = 35, ...rest }) => (
     </svg>
 );
 
-export const CementFactoryPin = ({ size = 35, ...rest }) => (
-    <svg className="pin" width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const CementFactoryPin = ({ size = 35, isDisabled, ...rest }) => (
+    <svg className={classnames('pin', { 'gray': isDisabled })} width={size} height={size} {...rest} viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="100" cy="100" r="100" fill="white" />
         <circle cx="100.5" cy="100.5" r="87.5" fill="#DE8122" />
         <rect x="49" y="105" width="46" height="46" stroke="white" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
@@ -55,9 +55,9 @@ export const CementFactoryPin = ({ size = 35, ...rest }) => (
     </svg>
 );
 
-export const PickupLocationPin = ({ size = 55, isLive = true, ...rest }) => {
+export const PickupLocationPin = ({ size = 55, isLive = true, isDisabled, ...rest }) => {
     return (
-        <svg className="pin" width={size} height={size} {...rest} viewBox="0 0 328 328" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className={classnames('pin', { 'gray': isDisabled })} width={size} height={size} {...rest} viewBox="0 0 328 328" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle id={isLive ? 'tracking-pin__animation' : ''} cx="164" cy="164" r="164" fill="#0029FA" fillOpacity="0.2" />
             <circle cx="163" cy="164" r="100" fill="white" />
             <circle cx="163.5" cy="164.5" r="87.5" fill="#0029FA" />

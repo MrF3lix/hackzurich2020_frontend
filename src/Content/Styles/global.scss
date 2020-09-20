@@ -111,6 +111,7 @@ h1 {
     left: 20px;
     .pin {
         transform: translate(0, 0);
+        margin-right: 10px;
     }
     
 
@@ -133,4 +134,8 @@ h1 {
             }
         }
     }
+}
+
+.gray {
+    filter: grayscale(100%);
 }
